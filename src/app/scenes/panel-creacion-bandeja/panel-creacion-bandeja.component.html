@@ -1,0 +1,75 @@
+<div class="app-panel-creacion-bandeja">
+  <h1>Panel de creacion de baraja</h1>
+  <div>
+    <button
+      *ngIf="stateEditing === EDICION_BANDEJA_MAESTRA_OFF"
+      color="primary"
+      mat-stroked-button
+      (click)="crearBaraja()"
+    >
+      crear baraja
+    </button>
+    <button
+      *ngIf="stateEditing === EDICION_BANDEJA_MAESTRA_OFF"
+      color="primary"
+      mat-stroked-button
+      (click)="editarbajaraMaestraOpen()"
+    >
+      Editar baraja maestra
+    </button>
+    <button
+      *ngIf="stateEditing === EDICION_BANDEJA_MAESTRA_ON"
+      color="primary"
+      mat-stroked-button
+      (click)="guardarBandejaMaestra()"
+    >
+      Guardar baraja maestra
+    </button>
+    <button
+      *ngIf="stateEditing === EDICION_BANDEJA_MAESTRA_ON"
+      color="primary"
+      mat-stroked-button
+      (click)="eliminando = !eliminando"
+    >
+      Eliminar {{ eliminando ? "ON" : "OFF" }}
+    </button>
+    <mat-form-field *ngIf="stateEditing === 'ttt'" appearance="fill">
+      <mat-label>Nombre de baraja</mat-label>
+      <input
+        matInput
+        type="text"
+        placeholder="Escribir nombre de la baraja"
+        [(ngModel)]="baraja_nueva.nombre"
+      />
+    </mat-form-field>
+    <button
+      *ngIf="stateEditing === EDICION_BANDEJA_X_ON"
+      color="primary"
+      mat-stroked-button
+      (click)="guardaBaraja()"
+    >
+      Guarda baraja
+    </button>
+    <button
+      *ngIf="
+        stateEditing == EDICION_BANDEJA_X_ON ||
+        stateEditing === EDICION_BANDEJA_MAESTRA_ON
+      "
+      color="primary"
+      mat-stroked-button
+      (click)="stateEditing = EDICION_BANDEJA_MAESTRA_OFF"
+    >
+      Cancelar
+    </button>
+  </div>
+  <app-general-tabla
+    *ngIf="
+      stateEditing === EDICION_BANDEJA_X_ON ||
+      stateEditing === EDICION_BANDEJA_MAESTRA_ON
+    "
+    [dataSource]="datasource"
+    (selectedElement)="accionTabla($event)"
+  >
+  </app-general-tabla>
+  <app-baraja [baraja]="service.barajaMaestra"></app-baraja>
+</div>

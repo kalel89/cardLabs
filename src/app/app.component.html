@@ -1,0 +1,58 @@
+<mat-toolbar>
+  <button
+    mat-icon-button
+    class="example-icon"
+    aria-label="Example icon-button with menu icon"
+  >
+    <mat-icon>menu</mat-icon>
+  </button>
+  <span>{{ title }}</span>
+  <span class="example-spacer"></span>
+  <button
+    (click)="navegar(1)"
+    mat-icon-button
+    class="example-icon"
+    aria-label="Example icon-button with heart icon"
+  >
+    <mat-icon>update</mat-icon>
+  </button>
+  <button
+    (click)="navegar(2)"
+    mat-icon-button
+    class="example-icon"
+    aria-label="Example home icon"
+  >
+    <mat-icon>tab_unselected</mat-icon>
+  </button>
+  <button
+    (click)="navegar(3)"
+    mat-icon-button
+    class="example-icon"
+    aria-label="Example home icon"
+  >
+    <mat-icon>line_weight</mat-icon>
+  </button>
+  <button
+    (click)="navegar(4)"
+    mat-icon-button
+    class="example-icon"
+    aria-label="Example home icon"
+  >
+    <mat-icon>backup</mat-icon>
+  </button>
+  <button
+    (click)="navegar(5)"
+    mat-icon-button
+    class="example-icon"
+    aria-label="Example home icon"
+  >
+    <mat-icon>published_with_changes</mat-icon>
+  </button>
+  Baraja Maestra: {{ service.barajaMaestra }} Juegos: {{ service.juegos }}
+</mat-toolbar>
+<!-- <nav>
+  <a routerLink="/login">Login</a>
+  <a routerLink="/dashboard">Calculo de Tipo de cambio</a>
+  <a routerLink="/tipo-cambio">Mantenimiento de Tipo de cambio</a>
+</nav>  -->
+<router-outlet></router-outlet>

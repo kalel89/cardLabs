@@ -1,0 +1,33 @@
+<p>panel-cargar-datos</p>
+<button mat-menu-item [matMenuTriggerFor]="cargarArchivoMenu">
+  Cargar Datos
+</button>
+<button mat-menu-item [matMenuTriggerFor]="cargarArchivoJuego">Juego</button>
+<mat-menu #cargarArchivoJuego="matMenu" yPosition="below">
+  <button mat-menu-item (click)="crearJuego()">Crear juego</button>
+  <button mat-menu-item (click)="guardarJuego()">Guardar juego</button>
+</mat-menu>
+<mat-menu #cargarArchivoMenu="matMenu" yPosition="below">
+  <app-file-upload class="block" (emiterfigura)="cargarFile($event)">
+  </app-file-upload>
+</mat-menu>
+
+<p>JUEGOS</p>
+<app-generic-table
+  [dataSource]="juegos"
+  [columnsToDisplay]="columnasJuego"
+  (selectedElement)="escogerJuego($event)"
+></app-generic-table>
+
+<p>Bandejas</p>
+<app-generic-table
+  [dataSource]="barajas"
+  [columnsToDisplay]="columnasBaraja"
+  (selectedElement)="escogerBandeja($event)"
+></app-generic-table>
+
+<p>Cartas</p>
+<app-generic-table
+  [dataSource]="cartas"
+  [columnsToDisplay]="columnasCarta"
+></app-generic-table>

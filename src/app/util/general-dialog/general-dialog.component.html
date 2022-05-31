@@ -1,0 +1,32 @@
+<div mat-dialog-content>
+  <p>Guardar ficha en bandeja</p>
+  <mat-form-field appearance="fill" *ngIf="internData.text1">
+    <mat-label>{{ internData.tituloText1 }}</mat-label>
+    <input
+      matInput
+      type="text"
+      placeholder="{{ internData.tituloText1 }}"
+      [(ngModel)]="internData.text1"
+    />
+  </mat-form-field>
+  <mat-form-field appearance="fill" *ngIf="internData.list1">
+    <mat-label>{{ internData.tituloList1 }}</mat-label>
+    <mat-select [(value)]="internData.indexSelected1">
+      <mat-option
+        *ngFor="let item1 of internData.list1"
+        [value]="item1.index"
+        >{{ item1.description }}</mat-option
+      >
+    </mat-select>
+  </mat-form-field>
+  <div class="row">
+    <div class="block">
+      <button mat-button cdkFocusInitial [mat-dialog-close]="internData">
+        Guardar
+      </button>
+    </div>
+    <div class="block">
+      <button mat-button (click)="onNoClick()">Cancelar</button>
+    </div>
+  </div>
+</div>

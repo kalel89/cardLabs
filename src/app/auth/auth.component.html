@@ -1,0 +1,13 @@
+<h2>Login</h2>
+<div>
+  <label for="new-user">Usuario: </label>
+  <input id="new-user" #user />
+
+  <label for="new-clave">Password: </label>
+  <input id="new-clave" #clave />
+
+  <!-- (click) passes input value to add() and then clears the input -->
+  <button class="add-button" (click)="login(user.value, clave.value); user.value=''; clave.value=''">
+    Autenticarse
+  </button>
+</div>

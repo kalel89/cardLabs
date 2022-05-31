@@ -1,0 +1,15 @@
+.app-panel-creacion-cartas {
+    
+}
+.mat-grid-tile {
+    background: rgb(214, 182, 39);
+    float: left;
+overflow: auto;
+}
+.pizarra {
+    border-style: double;
+    border-width: 4px;
+}
+
+
+    

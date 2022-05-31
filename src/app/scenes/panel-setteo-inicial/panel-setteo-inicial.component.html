@@ -1,0 +1,10 @@
+<button mat-menu-item [matMenuTriggerFor]="cargarArchivoJuego">Juegos</button>
+<mat-menu #cargarArchivoJuego="matMenu" yPosition="below">
+  <button mat-menu-item (click)="cargarJuego()">Probar juego</button>
+</mat-menu>
+<div *ngIf="juegoSeleccionado">
+  <h1>{{ juegoSeleccionado.nombre }}</h1>
+  <div *ngFor="let b of juegoSeleccionado.barajas">
+    <app-baraja [baraja]="b"></app-baraja>
+  </div>
+</div>

@@ -1,0 +1,176 @@
+<div class="app-panel-creacion-cartas">
+  <mat-grid-list cols="3" rowHeight="100px">
+    <mat-grid-tile [colspan]="3" [rowspan]="1" [style.background]="'#d7d7d7'">
+      <button
+        mat-stroked-button
+        [matMenuTriggerFor]="menuGeneral"
+        [style.background]="colorPintarPrueba"
+      >
+        Figura:{{ listaTipos[selected]?.nombre }}
+      </button>
+      <mat-menu #menuGeneral="matMenu" yPosition="below">
+        <button mat-menu-item [matMenuTriggerFor]="dibujoMenu">Dibujar</button>
+        <button mat-menu-item [matMenuTriggerFor]="archivoMenu">
+          Archivos
+        </button>
+        <mat-checkbox class="example-margin block" [(ngModel)]="vista_previa"
+          >Vista previa</mat-checkbox
+        >
+        <button mat-menu-item (click)="voltear()">
+          {{
+            ficha_modelo.estado === "1" ? "Mostrar reverso" : "Mostrar anverso"
+          }}
+        </button>
+      </mat-menu>
+      <mat-menu #dibujoMenu="matMenu" yPosition="below">
+        <button mat-menu-item [matMenuTriggerFor]="colorMenu">Color</button>
+        <mat-checkbox class="example-margin block" [(ngModel)]="relleno"
+          >relleno</mat-checkbox
+        >
+        <button
+          mat-menu-item
+          *ngFor="let f of listaTipos"
+          (click)="selected = f.id; accionTipoFigura(f.id)"
+          [value]="f.id"
+        >
+          {{ f.nombre }}
+        </button>
+      </mat-menu>
+      <mat-menu #archivoMenu="matMenu" yPosition="below">
+        <button
+          mat-menu-item
+          (click)="crearArchivoPropiedad('filename', getListaGraficos())"
+        >
+          Guardar imagen
+        </button>
+        <button mat-menu-item (click)="popupNombreDeFicha()">
+          Guardar Ficha
+        </button>
+        <button mat-menu-item (click)="popupSeleccionBaraja()">
+          Guardar ficha en baraja
+        </button>
+        <button mat-menu-item [matMenuTriggerFor]="cargarArchivoMenu">
+          Cargar imagen
+        </button>
+      </mat-menu>
+      <mat-menu #cargarArchivoMenu="matMenu" yPosition="below">
+        <app-file-upload class="block" (emiterfigura)="cargarFile($event)">
+        </app-file-upload>
+      </mat-menu>
+      <mat-menu #colorMenu="matMenu" yPosition="below">
+        <ngx-colors
+          ngx-colors-trigger
+          [(ngModel)]="colorPintarPrueba"
+        ></ngx-colors>
+      </mat-menu>
+      <mat-stepper #stepper orientation="horizontal">
+        <mat-step *ngFor="let f of getParametros()"> </mat-step>
+      </mat-stepper>
+    </mat-grid-tile>
+    <mat-grid-tile [colspan]="2" [rowspan]="6" [style.background]="'#d7d7d7'">
+      <div
+        class="pizarra"
+        #misvg
+        [style.width.px]="ficha_modelo.width"
+        [style.height.px]="ficha_modelo.height"
+        (click)="click($event)"
+        (onmousedown)="onmousedown($event)"
+        (oncontextmenu)="click($event)"
+        (onmouseup)="onmouseup($event)"
+      ></div>
+    </mat-grid-tile>
+    <mat-grid-tile [colspan]="1" [rowspan]="1" [style.background]="'#d7d7d7'">
+      <mat-form-field appearance="fill">
+        <mat-label>Ancho</mat-label>
+        <input
+          matInput
+          type="number"
+          placeholder="Ex. 12"
+          [(ngModel)]="ficha_modelo.width"
+          min="10"
+        />
+        <span matSuffix>px</span>
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>Alto</mat-label>
+        <input
+          matInput
+          type="number"
+          placeholder="Ex. 12"
+          [(ngModel)]="ficha_modelo.height"
+          min="10"
+        />
+        <span matSuffix>px</span>
+      </mat-form-field>
+    </mat-grid-tile>
+    <mat-grid-tile [colspan]="1" [rowspan]="5" [style.background]="'#d7d7d7'">
+      <mat-list #shoes>
+        <mat-list-item *ngFor="let figura of getListaGraficos(); let i = index">
+          <p>
+            fig.{{ figura.id }}
+            <button
+              [style.display]="figura.estado === 'guardado' ? 'none' : 'true'"
+              color="primary"
+              mat-stroked-button
+              (click)="eliminarFiguraDeLaLista(figura)"
+            >
+              Supr
+            </button>
+            <button
+              [style.display]="figura.estado === 'guardado' ? 'none' : 'true'"
+              color="primary"
+              mat-stroked-button
+              (click)="ocultarFigura(figura)"
+            >
+              {{ figura.dibujar ? "ocultar" : "mostrar" }}
+            </button>
+            <button
+              [style.display]="figura.estado === 'guardado' ? 'none' : 'true'"
+              color="primary"
+              mat-stroked-button
+              (click)="subir(figura)"
+            >
+              up
+            </button>
+            <button
+              color="primary"
+              mat-stroked-button
+              (click)="mover(figura, '1')"
+            >
+              △
+            </button>
+            <button
+              color="primary"
+              mat-stroked-button
+              (click)="mover(figura, '2')"
+            >
+              ▽
+            </button>
+            <button
+              color="primary"
+              mat-stroked-button
+              (click)="mover(figura, '4')"
+            >
+              ◅
+            </button>
+            <button
+              color="primary"
+              mat-stroked-button
+              (click)="mover(figura, '3')"
+            >
+              ▻
+            </button>
+            <button
+              color="primary"
+              mat-stroked-button
+              (click)="duplicar(figura)"
+            >
+              ||
+            </button>
+          </p>
+        </mat-list-item>
+      </mat-list>
+    </mat-grid-tile>
+  </mat-grid-list>
+</div>
+<app-carta *ngIf="vista_previa" [ficha]="ficha_modelo"></app-carta>

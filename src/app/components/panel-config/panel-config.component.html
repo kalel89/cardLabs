@@ -1,0 +1,28 @@
+<div class="app-panel-config">
+  <h1>Panel de creacion de baraja</h1>
+  <div>
+    <mat-form-field appearance="fill">
+      <mat-label>Nombre de baraja</mat-label>
+      <input
+        matInput
+        type="text"
+        placeholder="Escribir nombre de la baraja"
+        [(ngModel)]="baraja_nueva.nombre"
+      />
+      <span matSuffix>px</span>
+    </mat-form-field>
+    <button color="primary" mat-stroked-button (click)="crearBaraja()">
+      crear baraja
+    </button>
+    <button mat-menu-item [matMenuTriggerFor]="cargarArchivoMenu">
+      Cargar imagen
+    </button>
+    <mat-menu #cargarArchivoMenu="matMenu" yPosition="below">
+      <app-file-upload class="block" (emiterfigura)="cargarFile($event)">
+      </app-file-upload>
+    </mat-menu>
+    <button color="primary" mat-stroked-button (click)="guardaBaraja()">
+      guarda baraja
+    </button>
+  </div>
+</div>

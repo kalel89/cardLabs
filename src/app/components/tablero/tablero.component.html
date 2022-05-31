@@ -1,0 +1,8 @@
+<div class="app-tablero">
+    <app-panel-config (emiterTablero)="refrescar($event)"></app-panel-config> 
+    <div *ngFor = "let b of tablero.barajas">   
+        <app-baraja [baraja]=b></app-baraja>
+    </div>
+    <app-general-tabla></app-general-tabla>
+</div>
+  
