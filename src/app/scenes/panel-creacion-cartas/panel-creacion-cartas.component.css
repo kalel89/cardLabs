@@ -4,9 +4,10 @@
 .mat-grid-tile {
     background: rgb(214, 182, 39);
     float: left;
-overflow: auto;
+    overflow: auto;
 }
 .pizarra {
+    position: absolute;
     border-style: double;
     border-width: 4px;
 }
